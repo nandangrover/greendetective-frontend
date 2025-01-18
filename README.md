@@ -52,5 +52,16 @@ Project Structure
 └── styles/             # Global styles
 ```
 
+## Docker Commands
+
+### Development
+```bash
+# Start development environment
+docker-compose up web-dev
+
+# Build and start development environment
+docker-compose build web-dev && docker-compose up web-dev
+```
+
 ## License
 This project is proprietary software. All rights reserved.
