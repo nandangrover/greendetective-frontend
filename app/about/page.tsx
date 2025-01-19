@@ -1,7 +1,6 @@
 export default function About() {
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">About GreenDetective</h1>
       <p className="mb-4">
         GreenDetective is a cutting-edge tool designed to help journalists and researchers 
         uncover potential greenwashing in corporate communications. Our AI-powered analysis 

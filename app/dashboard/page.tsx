@@ -53,7 +53,7 @@ export default function Dashboard() {
   return (
     <Card className="w-full max-w-4xl mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-primary">Your Greenwashing Reports</CardTitle>
+        <CardTitle className="text-2xl font-bold text-primary"></CardTitle>
       </CardHeader>
       <CardContent>
         <div className="mb-6">

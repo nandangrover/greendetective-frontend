@@ -32,7 +32,7 @@ export default function Login() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-100">Email</label>
             <Input
               type="email"
               id="email"
@@ -43,7 +43,7 @@ export default function Login() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-100">Password</label>
             <Input
               type="password"
               id="password"
