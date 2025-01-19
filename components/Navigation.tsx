@@ -15,13 +15,10 @@ export function Navigation() {
             Home
           </a>
           {isAuthenticated && (
-            <a href="/dashboard" className="text-sm md:text-base text-foreground hover:text-primary transition-colors">
-              Dashboard
+            <a href="/reports" className="text-sm md:text-base text-foreground hover:text-primary transition-colors">
+              Reports
             </a>
           )}
-          <a href="/about" className="text-sm md:text-base text-foreground hover:text-primary transition-colors">
-            About
-          </a>
           {isAuthenticated ? (
             <button onClick={logout} className="text-sm md:text-base text-foreground hover:text-primary transition-colors">
               Logout

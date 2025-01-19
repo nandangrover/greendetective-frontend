@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ReportProvider } from "./contexts/ReportContext";
 import { AuthProvider } from '@/lib/auth/auth-provider'
 import { Navigation } from '@/components/Navigation'
+import { CookieBanner } from '@/components/CookieBanner'
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: "GreenDetective",
@@ -42,10 +44,21 @@ export default function RootLayout({
                 {children}
               </main>
               <footer className="py-4 px-6 bg-transparent backdrop-blur-sm text-center mt-auto">
-              <div className="max-w-7xl mx-auto text-sm text-muted-foreground">
-                © 2025 GreenDetective. All rights reserved.
-              </div>
-            </footer>
+                <div className="max-w-7xl mx-auto">
+                  <div className="flex justify-center space-x-4 mb-2">
+                    <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      About
+                    </Link>
+                    <Link href="/policies" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      Privacy Policy
+                    </Link>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    © 2025 GreenDetective. All rights reserved.
+                  </div>
+                </div>
+              </footer>
+              <CookieBanner />
             </ReportProvider>
           </ThemeProvider>
         </AuthProvider>

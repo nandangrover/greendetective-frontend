@@ -17,7 +17,7 @@ export default function Home() {
         </p>
         <div className="space-x-4">
           <Button size="lg" asChild className="group">
-            <Link href="/dashboard">
+            <Link href="/reports">
               Analyze Company
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
