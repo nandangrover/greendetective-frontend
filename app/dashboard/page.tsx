@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@/hooks/use-auth'
 import {
   Table,
   TableBody,
@@ -36,9 +38,16 @@ const statusColors = {
 }
 
 export default function Dashboard() {
+  const router = useRouter()
+  const { isAuthenticated } = useAuth()
   const [reports, setReports] = useState<Report[]>([])
 
   useEffect(() => {
+    if (isAuthenticated) {
+      console.log('User is not authenticated, redirecting to login page')
+      router.push('/login')
+      return
+    }
     // Fetch reports from API
     // This is a mock implementation
     const mockReports: Report[] = [
