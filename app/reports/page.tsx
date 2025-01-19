@@ -50,7 +50,7 @@ export default function Dashboard() {
   const [reports, setReports] = useState<Report[]>([]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       console.log("User is not authenticated, redirecting to login page");
       router.push("/login");
       return;

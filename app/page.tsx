@@ -1,8 +1,19 @@
+'use client'
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Database, ChartBar, FileSearch, Search } from "lucide-react";
+import {
+  ArrowRight,
+  Database,
+  ChartBar,
+  FileSearch,
+  Search,
+} from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function Home() {
+  const { isAuthenticated, logout } = useAuth();
+
   return (
     <main className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -17,10 +28,17 @@ export default function Home() {
         </p>
         <div className="space-x-4">
           <Button size="lg" asChild className="group">
-            <Link href="/reports">
-              Analyze Company
+            {isAuthenticated ? (
+              <Link href="/reports">
+                Investigate Company
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            ) : (
+              <Link href="/signup">
+              Investigate Company
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
+            )}
           </Button>
         </div>
       </section>
@@ -34,8 +52,8 @@ export default function Home() {
               Comprehensive Data Analysis
             </h3>
             <p className="text-muted-foreground">
-              Scrapes and analyzes corporate domain, sustainability
-              reports, and public statements
+              Scrapes and analyzes corporate domain, sustainability reports, and
+              public statements
             </p>
           </div>
           <div className="flex flex-col items-center text-center p-6 rounded-lg bg-card">

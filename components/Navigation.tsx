@@ -19,6 +19,11 @@ export function Navigation() {
               Reports
             </a>
           )}
+          {isAuthenticated && (
+            <a href="/pricing" className="text-sm md:text-base text-foreground hover:text-primary transition-colors">
+              Pricing
+            </a>
+          )}
           {isAuthenticated ? (
             <button onClick={logout} className="text-sm md:text-base text-foreground hover:text-primary transition-colors">
               Logout

@@ -13,11 +13,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { InfoIcon } from 'lucide-react'
+import { InfoIcon, TrashIcon, PlusIcon } from 'lucide-react'
 import { triggerDetective } from '../services/api'
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import Link from 'next/link';
+
+const isValidUrl = (url: string) => {
+  try {
+    const parsedUrl = new URL(url);
+    // Check if the hostname contains at least one dot (e.g., "example.com")
+    return parsedUrl.hostname.includes('.');
+  } catch {
+    return false;
+  }
+};
 
 type FormData = {
   companyName: string
@@ -25,20 +35,57 @@ type FormData = {
   aboutInfoType: 'link' | 'text'
   aboutPageLink: string
   companyInfo: string
-  urlsToProcess: string
+  urlsToProcess: string[]
 }
 
 export default function SubmitForm() {
   const [step, setStep] = useState(1)
   const { toast } = useToast()
-  const { control, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, watch, control, formState: { errors } } = useForm<FormData>({
     defaultValues: {
       companyName: '',
       domainName: '',
       aboutInfoType: 'link',
       aboutPageLink: '',
       companyInfo: '',
-      urlsToProcess: '',
+      urlsToProcess: [''],
+    },
+    // Add form validation rules
+    resolver: (data) => {
+      const errors: Record<string, any> = {};
+      
+      // Company name validation
+      if (!data.companyName) {
+        errors.companyName = { message: 'Company name is required' };
+      }
+  
+      // Domain name validation
+      if (!data.domainName) {
+        errors.domainName = { message: 'Domain name is required' };
+      }
+  
+      // About page validation based on type
+      if (data.aboutInfoType === 'link') {
+        if (!data.aboutPageLink) {
+          errors.aboutPageLink = { message: 'About page link is required' };
+        } else if (!isValidUrl(data.aboutPageLink)) {
+          errors.aboutPageLink = { message: 'Please enter a valid URL' };
+        }
+      } else {
+        if (!data.companyInfo) {
+          errors.companyInfo = { message: 'Company information is required' };
+        }
+      }
+  
+      // URLs validation (optional but must be valid if provided)
+      if (data.urlsToProcess.some(url => url && !isValidUrl(url))) {
+        errors.urlsToProcess = { message: 'Please enter valid URLs' };
+      }
+  
+      return {
+        values: data,
+        errors: errors
+      };
     }
   })
 
@@ -51,7 +98,7 @@ export default function SubmitForm() {
         domainName: data.domainName,
         aboutPageLink: data.aboutInfoType === 'link' ? data.aboutPageLink : '',
         companyInfo: data.aboutInfoType === 'text' ? data.companyInfo : '',
-        urlsToProcess: data.urlsToProcess.split('\n'),
+        urlsToProcess: data.urlsToProcess,
       })
       if (response.status === 'success') {
         toast({
@@ -208,7 +255,7 @@ export default function SubmitForm() {
                         {...field}
                         id="companyInfo"
                         className="w-full"
-                        placeholder="Enter information about the company's environmental claims and activities"
+                        placeholder="Enter information about what the company does, their business model, products, and any other relevant details"
                         rows={5}
                       />
                     )}
@@ -220,21 +267,59 @@ export default function SubmitForm() {
               <div>
                 <label htmlFor="urlsToProcess" className="block text-sm font-medium text-foreground mb-1 flex items-center">
                   URLs to Process
-                  {renderTooltip("Enter specific URLs from the company's website that you want analyzed, one per line")}
+                  {renderTooltip("Enter specific URLs from the company's website that you want analyzed")}
                 </label>
                 <Controller
                   name="urlsToProcess"
                   control={control}
+                  defaultValue={['']}
+                  rules={{
+                    validate: (urls) => 
+                      urls.every(url => !url || isValidUrl(url)) || 'Please enter valid URLs'
+                  }}
                   render={({ field }) => (
-                    <Textarea
-                      {...field}
-                      id="urlsToProcess"
-                      className="w-full"
-                      placeholder="https://www.example.com/sustainability
-https://www.example.com/green-initiatives
-https://www.example.com/environmental-impact"
-                      rows={5}
-                    />
+                    <div className="space-y-2">
+                      {field.value.map((url: string, index: number) => (
+                        <div key={index} className="flex flex-col gap-1">
+                          <div className="flex gap-2">
+                            <input
+                              type="url"
+                              className={`flex-1 rounded-md border px-3 py-2 ${
+                                url && !isValidUrl(url) ? 'border-red-500' : 'border-input'
+                              }`}
+                              placeholder="https://www.example.com/sustainability"
+                              value={url}
+                              onChange={(e) => {
+                                const newUrls = [...field.value];
+                                newUrls[index] = e.target.value;
+                                field.onChange(newUrls);
+                              }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newUrls = field.value.filter((_, i) => i !== index);
+                                field.onChange(newUrls);
+                              }}
+                              className="p-2 text-red-500 hover:text-red-700"
+                            >
+                              <TrashIcon className="h-5 w-5" />
+                            </button>
+                          </div>
+                          {url && !isValidUrl(url) && (
+                            <p className="text-sm text-red-500">Please enter a valid URL</p>
+                          )}
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => field.onChange([...field.value, ''])}
+                        className="mt-2 flex items-center gap-2 text-sm text-primary hover:text-primary/80"
+                        disabled={!field.value[field.value.length - 1] || !isValidUrl(field.value[field.value.length - 1])}
+                      >
+                        <PlusIcon className="h-4 w-4" /> Add URL
+                      </button>
+                    </div>
                   )}
                 />
               </div>
