@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ import {
 import { useAuth } from "@/hooks/use-auth";
 
 export default function Home() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
     <main className="flex flex-col min-h-screen">
@@ -35,9 +35,9 @@ export default function Home() {
               </Link>
             ) : (
               <Link href="/signup">
-              Investigate Company
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+                Investigate Company
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             )}
           </Button>
         </div>

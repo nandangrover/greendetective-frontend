@@ -10,6 +10,35 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: "GreenDetective",
   description: "Detect greenwashing in companies",
+  icons: {
+    icon: [
+      {
+        url: '/images/favicon/favicon-16x16.png',
+        type: 'image/png',
+        sizes: '16x16'
+      },
+      {
+        url: '/images/favicon/favicon-32x32.png',
+        type: 'image/png',
+        sizes: '32x32'
+      },
+      {
+        url: '/images/favicon/favicon-48x48.png',
+        type: 'image/png',
+        sizes: '48x48'
+      }
+    ],
+    apple: [
+      {
+        url: '/images/favicon/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png'
+      }
+    ],
+    shortcut: [
+      { url: '/images/favicon/favicon.ico' }
+    ]
+  }
 };
 
 export default function RootLayout({
