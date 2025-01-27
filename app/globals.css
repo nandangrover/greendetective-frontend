@@ -19,13 +19,13 @@ body {
     --card-foreground: 150 5% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 150 5% 10%;
-    --primary: 142 76% 36%;  /* Verdant Green */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 196 65% 45%;  /* Trust Blue */    
+    --primary: 74 85% 20%;  /* Olive green */
+    --primary-foreground: 74 30% 96%;  /* Light olive gray for contrast */
+    --secondary: 74 65% 45%;  /* Complementary olive tone */    
     --secondary-foreground: 0 0% 100%;
     --muted: 150 20% 96%;
     --muted-foreground: 150 35% 30%;
-    --accent: 43 96% 56%;  /* Sunlight Yellow */
+    --accent: 74 70% 56%;   /* Sunlight Yellow */
     --accent-foreground: 150 35% 15%;
     --destructive: 0 84% 60%;  /* Alert Red */
     --destructive-foreground: 0 0% 100%;
@@ -37,7 +37,7 @@ body {
 
   .dark {
     /* Base Colors */
-    --background: 0 0% 0%;  /* Deep midnight blue-gray */
+    --background: 200 25% 8%;  /* Deep midnight blue-gray */
     --foreground: 200 25% 98%;
     
     /* Card and Popover */
@@ -47,17 +47,18 @@ body {
     --popover-foreground: 200 25% 98%;
     
     /* Primary Actions */
-    --primary: 142 70% 45%;  /* Vibrant forest green */
+    /* White color*/
+    --primary: 74 85% 20%;
     --primary-foreground: 0 0% 100%;
     
     /* Secondary Elements */
-    --secondary: 200 30% 15%;
-    --secondary-foreground: 200 25% 98%;
+    --secondary: 74 70% 30%;
+    --secondary-foreground: 74 25% 98%;
     
     /* Interactive Elements */
-    --muted: 200 25% 20%;
-    --muted-foreground: 200 25% 70%;
-    --accent: 142 60% 40%;  /* Muted forest green */
+    --muted: 74 25% 20%;
+    --muted-foreground: 74 25% 70%;
+    --accent: 74 60% 40%;  /* Muted olive accent */
     --accent-foreground: 0 0% 100%;
     
     /* Destructive Actions */

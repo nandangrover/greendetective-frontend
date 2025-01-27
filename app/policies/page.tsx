@@ -2,114 +2,181 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Logo } from "@/components/Logo";
 
 export default function PoliciesPage() {
   return (
-    <main className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent text-center">
-        Our Policies
-      </h1>
-
-      <Tabs defaultValue="privacy" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-8">
-          <TabsTrigger value="privacy">Privacy Policy</TabsTrigger>
-          <TabsTrigger value="cookies">Cookie Policy</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="privacy">
-          <div className="prose prose-invert max-w-none mb-8">
-            <p className="text-lg text-center mb-8">
-              Your privacy is respected here. We aim to be transparent about how we handle your data
-              in our greenwashing detection service.
+    <div>
+      <div className="max-w-4xl mx-auto px-4 py-20">
+        <section className="space-y-8 mb-16">
+          <div className="text-center space-y-6">
+            <div className="flex justify-center mb-8 scale-150">
+              <Logo />
+            </div>
+            <p className="text-xl text-accent-foreground/80 leading-relaxed max-w-2xl mx-auto">
+              Trust and transparency form the foundation of our service. 
+              Below you'll find our comprehensive policies on how we protect and handle your information.
             </p>
           </div>
+        </section>
 
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="who">
-              <AccordionTrigger>Who we are</AccordionTrigger>
-              <AccordionContent>
-                GreenDetective is a service that helps identify potential greenwashing in corporate
-                environmental claims. We're committed to environmental transparency and data protection.
-              </AccordionContent>
-            </AccordionItem>
+        <Tabs defaultValue="privacy" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 h-14 items-center rounded-lg bg-muted p-1 mb-8">
+            <TabsTrigger 
+              value="privacy" 
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-l-md rounded-r-none px-8 py-2 text-lg font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm hover:bg-accent hover:text-accent-foreground"
+            >
+              Privacy Policy
+            </TabsTrigger>
+            <TabsTrigger 
+              value="cookies" 
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-r-md rounded-l-none px-8 py-2 text-lg font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm hover:bg-accent hover:text-accent-foreground"
+            >
+              Cookie Policy
+            </TabsTrigger>
+          </TabsList>
 
-            <AccordionItem value="data-collection">
-              <AccordionTrigger>Information we collect</AccordionTrigger>
-              <AccordionContent>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Company names and URLs for analysis</li>
-                  <li>Public environmental claims and reports</li>
-                  <li>User account information (if you create an account)</li>
-                  <li>Usage analytics to improve our detection algorithms</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
+          <TabsContent value="privacy">
 
-            <AccordionItem value="usage">
-              <AccordionTrigger>How we use your data</AccordionTrigger>
-              <AccordionContent>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>To analyze corporate environmental claims</li>
-                  <li>To improve our greenwashing detection algorithms</li>
-                  <li>To provide you with analysis reports</li>
-                  <li>To maintain and optimize our service</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              <AccordionItem value="who" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  Who we are
+                </AccordionTrigger>
+                <AccordionContent className="text-accent-foreground">
+                  GreenDetective is a service that helps identify potential greenwashing in corporate
+                  environmental claims. We're committed to environmental transparency and data protection.
+                </AccordionContent>
+              </AccordionItem>
 
-            <AccordionItem value="security">
-              <AccordionTrigger>Data Security</AccordionTrigger>
-              <AccordionContent>
-                We implement strong security measures to protect your data. All data is encrypted
-                and stored securely on servers within the EU/US.
-              </AccordionContent>
-            </AccordionItem>
+              <AccordionItem value="data-collection" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  Information we collect
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-3 text-accent-foreground">
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      Company names and URLs for analysis
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      Public environmental claims and reports
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      User account information (if you create an account)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      Usage analytics to improve our detection algorithms
+                    </li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
 
-            <AccordionItem value="rights">
-              <AccordionTrigger>Your Rights</AccordionTrigger>
-              <AccordionContent>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Access your data</li>
-                  <li>Request data deletion</li>
-                  <li>Object to processing</li>
-                  <li>Export your data</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </TabsContent>
+              <AccordionItem value="usage" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  How we use your data
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-3 text-accent-foreground">
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      To analyze corporate environmental claims
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      To improve our greenwashing detection algorithms
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      To provide you with analysis reports
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      To maintain and optimize our service
+                    </li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
 
-        <TabsContent value="cookies">
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="essential">
-              <AccordionTrigger>Essential Cookies</AccordionTrigger>
-              <AccordionContent>
-                Required for basic site functionality. These cannot be disabled.
-              </AccordionContent>
-            </AccordionItem>
+              <AccordionItem value="security" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  Data Security
+                </AccordionTrigger>
+                <AccordionContent className="text-accent-foreground">
+                  We implement strong security measures to protect your data. All data is encrypted
+                  and stored securely on servers within the EU/US.
+                </AccordionContent>
+              </AccordionItem>
 
-            <AccordionItem value="analytics">
-              <AccordionTrigger>Analytics Cookies</AccordionTrigger>
-              <AccordionContent>
-                Help us understand how visitors interact with our service.
-                You can opt-out of these cookies.
-              </AccordionContent>
-            </AccordionItem>
+              <AccordionItem value="rights" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  Your Rights
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-3 text-accent-foreground">
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      Access your data
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      Request data deletion
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      Object to processing
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      Export your data
+                    </li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </TabsContent>
 
-            <AccordionItem value="preferences">
-              <AccordionTrigger>Managing Preferences</AccordionTrigger>
-              <AccordionContent>
-                You can modify your cookie preferences at any time through our
-                cookie consent banner or browser settings.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="cookies">
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              <AccordionItem value="essential" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  Essential Cookies
+                </AccordionTrigger>
+                <AccordionContent className="text-accent-foreground">
+                  Required for basic site functionality. These cannot be disabled.
+                </AccordionContent>
+              </AccordionItem>
 
-      <footer className="mt-12 text-center text-sm text-muted-foreground">
-        <p>Last updated: {new Date().toLocaleDateString()}</p>
-      </footer>
-    </main>
+              <AccordionItem value="analytics" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  Analytics Cookies
+                </AccordionTrigger>
+                <AccordionContent className="text-accent-foreground">
+                  Help us understand how visitors interact with our service.
+                  You can opt-out of these cookies.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="preferences" className="border border-border rounded-xl bg-card/30 backdrop-blur-sm px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                  Managing Preferences
+                </AccordionTrigger>
+                <AccordionContent className="text-accent-foreground">
+                  You can modify your cookie preferences at any time through our
+                  cookie consent banner or browser settings.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </TabsContent>
+        </Tabs>
+
+        <footer className="mt-12 text-center text-sm text-accent-foreground">
+          <p>Last updated: {new Date().toLocaleDateString()}</p>
+        </footer>
+      </div>
+    </div>
   );
 }

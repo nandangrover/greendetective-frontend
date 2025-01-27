@@ -10,39 +10,76 @@ import {
 
 export default function Pricing() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6 text-center">Choose Your Plan</h1>
-      <div className="flex justify-center gap-6">
-        <Card className="w-[300px] flex flex-col">
+    <div className="py-12">
+      <h1 className="text-4xl font-bold mb-8 text-center text-accent-foreground">
+        Choose Your Plan
+      </h1>
+      <p className="text-center text-accent-foreground mb-12 max-w-2xl mx-auto">
+        Flexible pricing options designed for environmental professionals, 
+        consulting firms, and enterprise organizations.
+      </p>
+      <div className="flex flex-col md:flex-row justify-center gap-8 max-w-7xl mx-auto px-4">
+        <Card className="w-full md:w-[350px] flex flex-col">
           <CardHeader>
-            <CardTitle>Free Plan</CardTitle>
-            <CardDescription>For individual researchers</CardDescription>
+            <CardTitle>Basic</CardTitle>
+            <CardDescription className="text-accent-foreground">For individual professionals</CardDescription>
           </CardHeader>
-          <CardContent className="flex-grow space-y-2">
-            <div>✓ 3 analyses per month</div>
-            <div>✓ Basic report features</div>
-            <div>✓ Community support</div>
+          <CardContent className="flex-grow space-y-4">
+            <div className="text-3xl font-bold">£99<span className="text-lg font-normal">/month</span></div>
+            <div className="space-y-2">
+              <div className="flex items-center">✓ 10 reports per month</div>
+              <div className="flex items-center">✓ Basic greenwashing detection</div>
+              <div className="flex items-center">✓ Standard report exports</div>
+              <div className="flex items-center">✓ Email support</div>
+            </div>
           </CardContent>
           <CardFooter>
             <Button asChild className="w-full">
-              <a href="/signup">Start for Free</a>
+              <a href="/signup">Start Free Trial</a>
             </Button>
           </CardFooter>
         </Card>
 
-        <Card className="w-[300px] flex flex-col">
+        <Card className="w-full md:w-[350px] flex flex-col border-primary bg-card">
           <CardHeader>
-            <CardTitle>Premium Plan</CardTitle>
-            <CardDescription>For professional journalists</CardDescription>
+            <CardTitle className="text-card-foreground">Professional</CardTitle>
+            <CardDescription className="text-accent-foreground">For consulting firms & teams</CardDescription>
           </CardHeader>
-          <CardContent className="flex-grow space-y-2">
-            <div>✓ Unlimited analyses</div>
-            <div>✓ Advanced report features</div>
-            <div>✓ Priority support</div>
+          <CardContent className="flex-grow space-y-4">
+            <div className="text-3xl font-bold text-foreground">£299<span className="text-lg font-normal text-accent-foreground">/month</span></div>
+            <div className="space-y-2 text-card-foreground">
+              <div className="flex items-center">✓ Unlimited reports</div>
+              <div className="flex items-center">✓ Advanced AI detection</div>
+              <div className="flex items-center">✓ Custom report branding</div>
+              <div className="flex items-center">✓ Priority support</div>
+              <div className="flex items-center">✓ Team collaboration</div>
+            </div>
           </CardContent>
           <CardFooter>
-            <Button asChild className="w-full">
-              <a href="mailto:nandangrover.5@gmail.com?subject=Premium Plan Inquiry">Contact Sales</a>
+            <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+              <a href="/signup?plan=pro">Start Free Trial</a>
+            </Button>
+          </CardFooter>
+        </Card>
+
+        <Card className="w-full md:w-[350px] flex flex-col">
+          <CardHeader>
+            <CardTitle>Enterprise</CardTitle>
+            <CardDescription className="text-accent-foreground">For large organizations & ESG firms</CardDescription>
+          </CardHeader>
+          <CardContent className="flex-grow space-y-4">
+            <div className="text-3xl font-bold">Custom</div>
+            <div className="space-y-2">
+              <div className="flex items-center">✓ API access</div>
+              <div className="flex items-center">✓ Custom integrations</div>
+              <div className="flex items-center">✓ White-label options</div>
+              <div className="flex items-center">✓ Dedicated support</div>
+              <div className="flex items-center">✓ SLA guarantees</div>
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button asChild className="w-full" variant="outline">
+              <a href="mailto:enterprise@greendetective.com" className="text-accent-foreground">Contact Sales</a>
             </Button>
           </CardFooter>
         </Card>

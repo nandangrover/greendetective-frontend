@@ -7,7 +7,6 @@ import { useAuth } from "@/hooks/use-auth";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -21,7 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { InfoIcon } from "lucide-react";
+import { InfoIcon, FileText } from "lucide-react";
 
 type Report = {
   id: string;
@@ -38,10 +37,10 @@ const statusLabels = {
 };
 
 const statusColors = {
-  pending: "bg-yellow-100 text-yellow-800",
-  "in-progress": "bg-blue-100 text-blue-800",
-  failed: "bg-red-100 text-red-800",
-  success: "bg-green-100 text-green-800",
+  pending: "bg-primary/20 text-primary hover:bg-primary/30",
+  "in-progress": "bg-secondary/20 text-secondary hover:bg-secondary/30",
+  failed: "bg-destructive/20 text-destructive hover:bg-destructive/30",
+  success: "bg-accent/20 text-accent hover:bg-accent/30",
 };
 
 export default function Dashboard() {
@@ -100,55 +99,69 @@ export default function Dashboard() {
   );
 
   return (
-    <Card className="w-full max-w-4xl mx-auto">
-      <CardHeader></CardHeader>
-      <CardContent>
-        <div className="mb-6 flex justify-between">
-          <CardTitle className="block flex items-center">
-            Reports
-            {renderTooltip(
-              "A list of your recent greenwashing analysis reports"
-            )}
-          </CardTitle>
-          <Button asChild>
-            <a href="/investigate">New Analysis</a>
-          </Button>
-        </div>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Company Name</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Created At</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {reports.map((report) => (
-              <TableRow key={report.id}>
-                <TableCell className="font-medium">
-                  {report.companyName}
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    className={`${statusColors[report.status]} font-semibold`}
-                  >
-                    {statusLabels[report.status]}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  {new Date(report.createdAt).toLocaleDateString()}
-                </TableCell>
-                <TableCell className="text-right">
-                  <Button variant="outline" size="sm">
-                    View Report
-                  </Button>
-                </TableCell>
+    <div>
+      <Card className="w-full max-w-4xl mx-auto bg-background/30 backdrop-blur-sm border-border">
+        <CardHeader className="border-b border-border">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <FileText className="w-5 h-5 text-primary" />
+              <CardTitle className="text-foreground">Reports</CardTitle>
+              {renderTooltip(
+                "A list of your recent greenwashing analysis reports"
+              )}
+            </div>
+            <Button 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              asChild
+            >
+              <a href="/investigate">New Analysis</a>
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <Table>
+            <TableHeader>
+              <TableRow className="border-gray-800">
+                <TableHead className="text-gray-400">Company Name</TableHead>
+                <TableHead className="text-gray-400">Status</TableHead>
+                <TableHead className="text-gray-400">Created At</TableHead>
+                <TableHead className="text-right text-gray-400">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+            </TableHeader>
+            <TableBody>
+              {reports.map((report) => (
+                <TableRow 
+                  key={report.id} 
+                  className="border-gray-800 hover:bg-white/5"
+                >
+                  <TableCell className="font-medium text-gray-300">
+                    {report.companyName}
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      className={`${statusColors[report.status]} transition-colors duration-200`}
+                    >
+                      {statusLabels[report.status]}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-gray-400">
+                    {new Date(report.createdAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      className="border-gray-700 hover:bg-gray-800 text-gray-300"
+                    >
+                      View Report
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
