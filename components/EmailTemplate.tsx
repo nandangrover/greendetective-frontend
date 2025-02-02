@@ -9,6 +9,37 @@ import {
   Text,
 } from '@react-email/components'
 
+const main = {
+  backgroundColor: '#ffffff',
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+};
+
+const container = {
+  width: '400px',
+  margin: '40px auto',
+  padding: '20px',
+  backgroundColor: '#f5f5f5',
+};
+
+const heading = {
+  fontSize: '24px',
+  fontWeight: 'bold',
+  marginBottom: '20px',
+};
+
+const paragraph = {
+  fontSize: '16px',
+  lineHeight: '1.5',
+  marginBottom: '10px',
+};
+
+
+const messageText = {
+  fontSize: '16px',
+  lineHeight: '1.5',
+  marginBottom: '10px',
+};
+
 interface EmailTemplateProps {
   firstName: string
   lastName: string

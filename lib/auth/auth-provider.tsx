@@ -3,7 +3,7 @@
 import { ReactNode, useState, useEffect } from 'react'
 import { AuthContext } from './auth-context'
 import { AuthState, User } from './types'
-import { setAuthStateForAPI, refreshToken } from './api'
+import { setAuthStateForAPI } from './api'
 
 // Update constants at the top of file
 const COOKIE_EXPIRATION_TIME = 24 * 60 * 60 // 24 hours in seconds
