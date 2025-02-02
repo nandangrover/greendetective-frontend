@@ -35,11 +35,14 @@ export default function Home() {
       />
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
-        <h1 className="!leading-relaxed md:text-6xl font-bold mb-7 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent flex items-center justify-center gap-4">
-          AI-Powered Greenwashing Detection
-          <Search className="h-12 w-12 text-primary transition-all duration-300 hover:scale-110" />
+        <h1 className="!leading-relaxed text-4xl md:text-6xl font-bold mb-7 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent flex flex-wrap items-center justify-center gap-2 md:gap-4">
+          AI-Powered Greenwashing
+          <span className="flex items-center gap-2">
+            Detection
+            <Search className="h-8 w-8 md:h-12 md:w-12 text-primary transition-all duration-300 hover:scale-110" />
+          </span>
         </h1>
-        <p className="text-xl md:text-2xl mb-8 max-w-2xl text-accent-foreground">
+        <p className="text-lg md:text-2xl mb-8 max-w-2xl text-accent-foreground px-4">
           Protect your organization with data-driven environmental claim verification
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
@@ -76,24 +79,24 @@ export default function Home() {
       {/* How It Works Section */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="!leading-relaxed md:text-4xl mb-7 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent flex items-center justify-center gap-4">
+          <h2 className="!leading-relaxed text-3xl md:text-4xl mb-7 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent flex items-center justify-center gap-4">
             Streamlined Greenwashing Detection
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {/* Step 1 */}
             <div className="relative group">
-              <div className="bg-card p-8 rounded-2xl border border-border shadow-lg hover:shadow-primary/5 transition-all duration-300 h-full">
-                <div className="absolute -top-6 left-8 bg-primary/10 rounded-xl p-3 group-hover:bg-primary/20 transition-colors duration-300">
-                  <Database className="h-8 w-8 text-primary" />
+              <div className="bg-card p-6 md:p-8 rounded-2xl border border-border shadow-lg hover:shadow-primary/5 transition-all duration-300 h-full">
+                <div className="absolute -top-6 left-8 bg-primary/20 rounded-xl p-3 group-hover:bg-primary/30 transition-colors duration-300">
+                  <Database className="h-8 w-8 text-primary" strokeWidth={1.5} />
                 </div>
                 <div className="mt-4">
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="text-4xl font-bold text-accent-foreground">1</span>
-                    <h3 className="text-xl font-bold text-accent-foreground">Input Company Data</h3>
+                    <span className="text-3xl md:text-4xl font-bold text-accent-foreground">1</span>
+                    <h3 className="text-lg md:text-xl font-bold text-accent-foreground">Input Company Data</h3>
                   </div>
-                  <p className="text-accent-foreground/80">
-                    Simply provide a company name or URL. Our system automatically gathers and processes relevant data from multiple sources, including sustainability reports, corporate communications, and public statements.
+                  <p className="text-sm md:text-base text-accent-foreground/80">
+                    Simply provide a company name or URL. Our system automatically gathers and processes relevant data from multiple sources.
                   </p>
                 </div>
               </div>
@@ -104,17 +107,17 @@ export default function Home() {
 
             {/* Step 2 */}
             <div className="relative group">
-              <div className="bg-card p-8 rounded-2xl border border-border shadow-lg hover:shadow-primary/5 transition-all duration-300 h-full">
-                <div className="absolute -top-6 left-8 bg-primary/10 rounded-xl p-3 group-hover:bg-primary/20 transition-colors duration-300">
-                  <ChartBar className="h-8 w-8 text-primary" />
+              <div className="bg-card p-6 md:p-8 rounded-2xl border border-border shadow-lg hover:shadow-primary/5 transition-all duration-300 h-full">
+                <div className="absolute -top-6 left-8 bg-primary/20 rounded-xl p-3 group-hover:bg-primary/30 transition-colors duration-300">
+                  <ChartBar className="h-8 w-8 text-primary" strokeWidth={1.5} />
                 </div>
                 <div className="mt-4">
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="text-4xl font-bold text-accent-foreground">2</span>
-                    <h3 className="text-xl font-bold text-accent-foreground">AI-Powered Analysis</h3>
+                    <span className="text-3xl md:text-4xl font-bold text-accent-foreground">2</span>
+                    <h3 className="text-lg md:text-xl font-bold text-accent-foreground">AI-Powered Analysis</h3>
                   </div>
-                  <p className="text-accent-foreground/80">
-                    Our advanced algorithms perform comprehensive analysis using vector similarity and natural language processing to detect potential greenwashing claims and verify environmental statements.
+                  <p className="text-sm md:text-base text-accent-foreground/80">
+                    Our advanced algorithms perform comprehensive analysis using vector similarity and natural language processing.
                   </p>
                 </div>
               </div>
@@ -125,17 +128,17 @@ export default function Home() {
 
             {/* Step 3 */}
             <div className="relative group">
-              <div className="bg-card p-8 rounded-2xl border border-border shadow-lg hover:shadow-primary/5 transition-all duration-300 h-full">
-                <div className="absolute -top-6 left-8 bg-primary/10 rounded-xl p-3 group-hover:bg-primary/20 transition-colors duration-300">
-                  <FileSearch className="h-8 w-8 text-primary" />
+              <div className="bg-card p-6 md:p-8 rounded-2xl border border-border shadow-lg hover:shadow-primary/5 transition-all duration-300 h-full">
+                <div className="absolute -top-6 left-8 bg-primary/20 rounded-xl p-3 group-hover:bg-primary/30 transition-colors duration-300">
+                  <FileSearch className="h-8 w-8 text-primary" strokeWidth={1.5} />
                 </div>
                 <div className="mt-4">
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="text-4xl font-bold text-accent-foreground">3</span>
-                    <h3 className="text-xl font-bold text-accent-foreground">Comprehensive Report</h3>
+                    <span className="text-3xl md:text-4xl font-bold text-accent-foreground">3</span>
+                    <h3 className="text-lg md:text-xl font-bold text-accent-foreground">Comprehensive Report</h3>
                   </div>
-                  <p className="text-accent-foreground/80">
-                    Receive detailed insights with risk scores, evidence-based assessments, and actionable recommendations for improving environmental claim accuracy and compliance.
+                  <p className="text-sm md:text-base text-accent-foreground/80">
+                    Receive detailed insights with risk scores, evidence-based assessments, and actionable recommendations.
                   </p>
                 </div>
               </div>

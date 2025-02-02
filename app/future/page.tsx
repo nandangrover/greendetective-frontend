@@ -267,7 +267,7 @@ function RoadmapSection({ date, items }: {
   return (
     <div className="relative">
       {/* Date Marker */}
-      <div className="absolute left-0 md:left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-4 py-2 rounded-full border text-sm font-medium">
+      <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-3 py-1 rounded-full border text-sm font-medium">
         {date}
       </div>
 

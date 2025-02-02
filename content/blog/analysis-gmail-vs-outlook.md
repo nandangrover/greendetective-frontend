@@ -1,7 +1,7 @@
 ---
 title: "Understanding Greenwashing: Definition, Mechanisms, Examples, and Key Statistics"
 date: "2023-06-03T19:16:34+01:00"
-image: "/images/blog/greenwashing_explained.jpg"
+image: "/images/blog/about_page.jpg"
 categories: ["Knowledge"]
 type: "featured"
 draft: false
