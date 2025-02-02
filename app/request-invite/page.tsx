@@ -4,15 +4,18 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from 'next/navigation';
 
 export default function RequestInvite() {
-  const { toast } = useToast()
+  const { toast } = useToast();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     companyName: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -21,13 +24,49 @@ export default function RequestInvite() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would send the request to your backend
-    console.log('Invite requested:', formData)
+    setIsSubmitting(true)
     
-    toast({
-      title: "Request Submitted",
-      description: "We'll review your request and get back to you soon.",
-    })
+    try {
+      const response = await fetch('/api/v1/detective/request-invite/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company_name: formData.companyName,
+        }),
+      })
+
+      const result = await response.json()
+      
+      if (result.status !== 'success') {
+        throw new Error(result.message || 'Failed to submit request')
+      }
+
+      toast({
+        title: "Request Submitted",
+        description: "We'll review your request and get back to you soon.",
+      })
+      
+      // Clear form
+      setFormData({
+        name: '',
+        email: '',
+        companyName: '',
+      })
+
+      router.push('/')
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "An error occurred",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -79,7 +118,7 @@ export default function RequestInvite() {
         </form>
       </CardContent>
       <CardFooter>
-        <Button onClick={handleSubmit} className="w-full">Submit Request</Button>
+        <Button onClick={handleSubmit} className="w-full" disabled={isSubmitting}>Submit Request</Button>
       </CardFooter>
     </Card>
   )

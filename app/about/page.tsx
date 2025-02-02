@@ -13,6 +13,19 @@ import {
   Gauge,
   BarChart3,
 } from "lucide-react";
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "About GreenDetective - Our Mission and Vision",
+  description: "Learn about GreenDetective's mission to combat greenwashing through AI-powered environmental claim verification and our vision for corporate accountability.",
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: "About GreenDetective - Our Mission and Vision",
+    description: "Learn about GreenDetective's mission to combat greenwashing through AI-powered environmental claim verification and our vision for corporate accountability.",
+  },
+}
 
 export default function About() {
   return (
@@ -41,7 +54,7 @@ export default function About() {
           <div className="relative h-[500px] rounded-2xl overflow-hidden">
             <div className="absolute inset-0 z-10" />
             <Image
-              src="/images/about_page.png"
+              src="/images/about_page.jpg"
               alt="Environmental Technology Visualization"
               fill
               className="object-cover object-center opacity-50"

@@ -1,10 +1,42 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LayoutContent } from '@/components/LayoutContent';
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: "GreenDetective",
-  description: "Detect greenwashing in companies",
+  title: {
+    default: "GreenDetective - AI-Powered Greenwashing Detection",
+    template: "%s | GreenDetective"
+  },
+  description: "Detect and prevent greenwashing with our AI-powered platform. Verify environmental claims, analyze corporate communications, and ensure ESG compliance.",
+  keywords: [
+    "greenwashing detection",
+    "ESG compliance",
+    "environmental claims verification",
+    "sustainability analysis",
+    "AI environmental analysis"
+  ],
+  openGraph: {
+    title: "GreenDetective - AI-Powered Greenwashing Detection",
+    description: "Detect and prevent greenwashing with our AI-powered platform. Verify environmental claims, analyze corporate communications, and ensure ESG compliance.",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    siteName: "GreenDetective",
+    images: [
+      {
+        url: '/images/about_page.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "GreenDetective - AI-Powered Greenwashing Detection",
+    description: "Detect and prevent greenwashing with our AI-powered platform. Verify environmental claims, analyze corporate communications, and ensure ESG compliance.",
+    images: ['/images/about_page.jpg'],
+  },
   icons: {
     icon: [
       {
@@ -34,6 +66,7 @@ export const metadata: Metadata = {
       }
     ],
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://greendetective.earth'),
 };
 
 export default function RootLayout({
@@ -44,6 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-background min-h-screen bg-gradient-to-b from-background/80 via-muted/20 to-primary/10">
+      <Toaster />
         <LayoutContent>
           {children}
         </LayoutContent>

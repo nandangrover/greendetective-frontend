@@ -174,7 +174,7 @@ export default function PoliciesPage() {
         </Tabs>
 
         <footer className="mt-12 text-center text-sm text-accent-foreground">
-          <p>Last updated: {new Date().toLocaleDateString()}</p>
+          <p>Last updated: 2025-01-27</p>
         </footer>
       </div>
     </div>

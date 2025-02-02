@@ -25,11 +25,18 @@ export default function Pricing() {
             <CardDescription className="text-accent-foreground">For individual professionals</CardDescription>
           </CardHeader>
           <CardContent className="flex-grow space-y-4">
-            <div className="text-3xl font-bold">£99<span className="text-lg font-normal">/month</span></div>
+            <div className="text-3xl font-bold relative">
+              <span className="blur-md">£299</span>
+              <span className="absolute inset-0 flex items-center justify-center text-sm font-normal text-muted-foreground">
+                Pricing coming soon
+              </span>
+            </div>
             <div className="space-y-2">
               <div className="flex items-center">✓ 10 reports per month</div>
-              <div className="flex items-center">✓ Basic greenwashing detection</div>
-              <div className="flex items-center">✓ Standard report exports</div>
+              <div className="flex items-center">✓ Basic ESG risk detection</div>
+              <div className="flex items-center">✓ Standard report templates</div>
+              <div className="flex items-center">✓ Basic data visualization</div>
+              <div className="flex items-center">✓ Monthly trend analysis</div>
               <div className="flex items-center">✓ Email support</div>
             </div>
           </CardContent>
@@ -46,13 +53,20 @@ export default function Pricing() {
             <CardDescription className="text-accent-foreground">For consulting firms & teams</CardDescription>
           </CardHeader>
           <CardContent className="flex-grow space-y-4">
-            <div className="text-3xl font-bold text-foreground">£299<span className="text-lg font-normal text-accent-foreground">/month</span></div>
+            <div className="text-3xl font-bold text-foreground relative">
+              <span className="blur-md">£299</span>
+              <span className="absolute inset-0 flex items-center justify-center text-sm font-normal text-muted-foreground">
+                Pricing coming soon
+              </span>
+            </div>
             <div className="space-y-2 text-card-foreground">
               <div className="flex items-center">✓ Unlimited reports</div>
               <div className="flex items-center">✓ Advanced AI detection</div>
               <div className="flex items-center">✓ Custom report branding</div>
+              <div className="flex items-center">✓ Real-time monitoring</div>
+              <div className="flex items-center">✓ Expert report curation</div>
+              <div className="flex items-center">✓ Regulatory compliance tracking</div>
               <div className="flex items-center">✓ Priority support</div>
-              <div className="flex items-center">✓ Team collaboration</div>
             </div>
           </CardContent>
           <CardFooter>
@@ -68,18 +82,25 @@ export default function Pricing() {
             <CardDescription className="text-accent-foreground">For large organizations & ESG firms</CardDescription>
           </CardHeader>
           <CardContent className="flex-grow space-y-4">
-            <div className="text-3xl font-bold">Custom</div>
+            <div className="text-3xl font-bold relative">
+              <span className="blur-md">£299</span>
+              <span className="absolute inset-0 flex items-center justify-center text-sm font-normal text-muted-foreground">
+              Pricing coming soon
+              </span>
+            </div>
             <div className="space-y-2">
-              <div className="flex items-center">✓ API access</div>
+              <div className="flex items-center">✓ Full API access</div>
               <div className="flex items-center">✓ Custom integrations</div>
               <div className="flex items-center">✓ White-label options</div>
-              <div className="flex items-center">✓ Dedicated support</div>
+              <div className="flex items-center">✓ Dedicated analyst support</div>
+              <div className="flex items-center">✓ Custom scoring models</div>
+              <div className="flex items-center">✓ Unlimited user seats</div>
               <div className="flex items-center">✓ SLA guarantees</div>
             </div>
           </CardContent>
           <CardFooter>
             <Button asChild className="w-full" variant="outline">
-              <a href="mailto:enterprise@greendetective.com" className="text-accent-foreground">Contact Sales</a>
+              <a href="mailto:enterprise@greendetective.earth" className="text-accent-foreground">Contact Sales</a>
             </Button>
           </CardFooter>
         </Card>

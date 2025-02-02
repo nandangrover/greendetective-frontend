@@ -14,8 +14,25 @@ import { useAuth } from "@/hooks/use-auth";
 export default function Home() {
   const { isAuthenticated } = useAuth();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "GreenDetective",
+    "url": process.env.NEXT_PUBLIC_SITE_URL,
+    "description": "AI-powered platform for detecting greenwashing and verifying environmental claims",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${process.env.NEXT_PUBLIC_SITE_URL}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  }
+
   return (
     <main className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
         <h1 className="!leading-relaxed md:text-6xl font-bold mb-7 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent flex items-center justify-center gap-4">

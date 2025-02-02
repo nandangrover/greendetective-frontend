@@ -13,26 +13,88 @@ body {
 
 @layer base {
   :root {
+    /* Modern Light Theme with Blue Gradient Emphasis */
+    --background: 0 0% 100%;      /* Clean white background */
+    --foreground: 222 47% 11%;    /* Rich blue-black for main text */
+    
+    /* Card and Popover */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    /* Primary Colors - Gradient Blue */
+    --primary: 217 91% 60%;           /* Vibrant blue matching your UI */
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary Colors */
+    --secondary: 214 95% 93%;         /* Light blue tint */
+    --secondary-foreground: 217 91% 60%;
+    
+    /* Muted Elements - Subtle Blues */
+    --muted: 213 20% 97%;            /* Very light blue-gray */
+    --muted-foreground: 215 25% 27%;  /* Readable muted text */
+    
+    /* Accent Colors - Supporting Blues */
+    --accent: 213 100% 96%;          /* Soft highlight blue */
+    --accent-foreground: 217 91% 60%; /* Matching primary */
+    
+    /* Destructive Actions */
+    --destructive: 0 84% 60%;        /* Clear red */
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Borders and Forms */
+    --border: 216 34% 89%;          /* Subtle blue-tinted border */
+    --input: 216 34% 89%;
+    --ring: 217 91% 60%;            /* Matches primary */
+
+    /* Chart Colors - Professional Palette */
+    --chart-1: 217 91% 60%;         /* Primary blue */
+    --chart-2: 213 94% 68%;         /* Light blue */
+    --chart-3: 232 89% 61%;         /* Purple blue */
+    --chart-4: 201 96% 62%;         /* Sky blue */
+    --chart-5: 198 93% 60%;         /* Ocean blue */
+    
+    /* Sidebar Specific */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 213 100% 96%;
+    --sidebar-accent-foreground: 217 91% 60%;
+    --sidebar-border: 216 34% 89%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Radius */
+    --radius: 0.5rem;
+  }
+
+  /* Nature Theme */
+  .theme-nature {
     --background: 0 0% 100%;
     --foreground: 150 5% 10%;
     --card: 0 0% 100%;
     --card-foreground: 150 5% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 150 5% 10%;
-    --primary: 74 85% 20%;  /* Olive green */
-    --primary-foreground: 74 30% 96%;  /* Light olive gray for contrast */
-    --secondary: 74 65% 45%;  /* Complementary olive tone */    
+    --primary: 74 85% 20%;     /* Olive green */
+    --primary-foreground: 74 30% 96%;
+    --secondary: 74 65% 45%;   /* Complementary olive tone */    
     --secondary-foreground: 0 0% 100%;
     --muted: 150 20% 96%;
     --muted-foreground: 150 35% 30%;
-    --accent: 74 70% 56%;   /* Sunlight Yellow */
+    --accent: 74 70% 56%;      /* Sunlight Yellow */
     --accent-foreground: 150 35% 15%;
-    --destructive: 0 84% 60%;  /* Alert Red */
+    --olive-light: 74 70% 93%;
+    --olive-medium: 74 65% 35%;
+    --sage: 150 30% 40%;
+    --forest: 150 40% 20%;
+    --earth: 32 40% 25%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 150 30% 90%;
     --input: 150 30% 90%;
     --ring: 142 76% 36%;
-    --radius: 0.5rem;
   }
 
   .dark {

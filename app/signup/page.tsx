@@ -6,14 +6,21 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import Link from 'next/link'
 import { Progress } from "@/components/ui/progress"
-import { useSearchParams } from 'next/navigation'
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { CheckCircle } from 'lucide-react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import { useAuth } from '@/hooks/use-auth'
+import { useToast } from '@/hooks/use-toast'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function Signup() {
+  const { signup, isAuthenticated } = useAuth()
   const [step, setStep] = useState(1)
-  const [showVerifiedMessage, setShowVerifiedMessage] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const searchParams = useSearchParams()
+  const router = useRouter()
+  const { toast } = useToast()
   const [formData, setFormData] = useState({
     // Account Details
     inviteCode: '',
@@ -34,33 +41,128 @@ export default function Signup() {
   })
 
   useEffect(() => {
-    // Check if the verified query parameter is present
     if (searchParams.get('verified') === 'true') {
-      setShowVerifiedMessage(true)
-      
-      // Automatically hide the message after 5 seconds
-      const timer = setTimeout(() => {
-        setShowVerifiedMessage(false)
-      }, 5000)
-      
-      return () => clearTimeout(timer)
+      toast({
+        title: 'Email Verified!',
+        description: 'Your email has been successfully verified. You can now login.',
+      })
     }
-  }, [searchParams])
+  }, [searchParams, toast])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/reports')
+    }
+  }, [isAuthenticated, router])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData(prevData => ({ ...prevData, [name]: value }))
   }
 
+  const validateStep = () => {
+    if (step === 1) {
+      if (!formData.inviteCode || formData.inviteCode.length < 6) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Invite Code',
+          description: 'Invite code must be at least 6 characters',
+        })
+        return false
+      }
+      if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Email',
+          description: 'Please enter a valid email address',
+        })
+        return false
+      }
+      if (!formData.password || formData.password.length < 8) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Password',
+          description: 'Password must be at least 8 characters',
+        })
+        return false
+      }
+      if (formData.password !== formData.confirmPassword) {
+        toast({
+          variant: 'destructive',
+          title: 'Passwords Mismatch',
+          description: 'Passwords do not match',
+        })
+        return false
+      }
+    }
+
+    if (step === 2) {
+      if (!formData.businessName || formData.businessName.length < 2) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Business Name',
+          description: 'Business name must be at least 2 characters',
+        })
+        return false
+      }
+      if (formData.website && !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(formData.website)) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Website',
+          description: 'Please enter a valid website URL',
+        })
+        return false
+      }
+      if (!formData.industry || formData.industry.length < 2) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Industry',
+          description: 'Industry must be at least 2 characters',
+        })
+        return false
+      }
+      if (!formData.companySize) {
+        toast({
+          variant: 'destructive',
+          title: 'Company Size Required',
+          description: 'Please select a company size',
+        })
+        return false
+      }
+    }
+
+    if (step === 3) {
+      if (!formData.username || formData.username.length < 3) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Username',
+          description: 'Username must be at least 3 characters',
+        })
+        return false
+      }
+      if (!formData.jobTitle || formData.jobTitle.length < 2) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Job Title',
+          description: 'Job title must be at least 2 characters',
+        })
+        return false
+      }
+      if (!formData.phone || !/^\+?[1-9]\d{1,14}$/.test(formData.phone)) {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Phone Number',
+          description: 'Please enter a valid phone number',
+        })
+        return false
+      }
+    }
+
+    return true
+  }
+
   const nextStep = () => {
-    if (step === 1 && (!formData.inviteCode || !formData.email || !formData.password || !formData.confirmPassword)) {
-      alert('Please fill in all fields')
-      return
-    }
-    if (step === 1 && formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match")
-      return
-    }
+    if (!validateStep()) return
     if (step < 3) setStep(step + 1)
   }
 
@@ -70,41 +172,53 @@ export default function Signup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
+    setLoading(true)
     
-    const profile = {
-      job_title: formData.jobTitle,
-      phone: formData.phone,
-      business: {
-        name: formData.businessName,
-        website: formData.website,
-        industry: formData.industry,
-        size: formData.companySize
-      }
+    // Ensure website has https://
+    let website = formData.website
+    if (website && !website.startsWith('http')) {
+      website = `https://${website}`
     }
 
-    const signupData = {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-      invite_code: formData.inviteCode,
-      profile
+    try {
+      await signup({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        invite_code: formData.inviteCode,
+        profile: {
+          job_title: formData.jobTitle,
+          phone: formData.phone,
+          business: {
+            name: formData.businessName,
+            website: website,
+            industry: formData.industry,
+            size: formData.companySize
+          }
+        }
+      })
+      
+      toast({
+        title: 'Signup Successful!',
+        description: 'Your account has been created successfully.',
+      })
+      router.push('/reports')
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Signup failed'
+      setError(errorMessage)
+      toast({
+        variant: 'destructive',
+        title: 'Signup Error',
+        description: errorMessage,
+      })
+    } finally {
+      setLoading(false)
     }
-
-    console.log('Signup form submitted:', signupData)
-    // Implement API call to signup endpoint
   }
 
   return (
     <div className="space-y-4">
-      {showVerifiedMessage && (
-        <Alert className="max-w-[400px] mx-auto">
-          <CheckCircle className="h-4 w-4" />
-          <AlertTitle>Email Verified!</AlertTitle>
-          <AlertDescription>
-            Your email has been successfully verified. You can now login.
-          </AlertDescription>
-        </Alert>
-      )}
       <Card className="w-[400px] mx-auto">
         <CardHeader>
           <CardTitle>Sign Up</CardTitle>
@@ -199,14 +313,22 @@ export default function Signup() {
                 </div>
                 <div>
                   <label htmlFor="companySize" className="block text-sm font-medium text-foreground">Company Size</label>
-                  <Input
-                    type="text"
-                    id="companySize"
-                    name="companySize"
+                  <Select
                     value={formData.companySize}
-                    onChange={handleChange}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, companySize: value }))}
                     required
-                  />
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select company size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1-10">1-10 employees</SelectItem>
+                      <SelectItem value="11-50">11-50 employees</SelectItem>
+                      <SelectItem value="51-200">51-200 employees</SelectItem>
+                      <SelectItem value="201-500">201-500 employees</SelectItem>
+                      <SelectItem value="501+">501+ employees</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </>
             )}
@@ -237,13 +359,12 @@ export default function Signup() {
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-foreground">Phone</label>
-                  <Input
-                    type="tel"
-                    id="phone"
-                    name="phone"
+                  <PhoneInput
+                    international
+                    defaultCountry="GB"
                     value={formData.phone}
-                    onChange={handleChange}
-                    required
+                    onChange={(value) => setFormData(prev => ({ ...prev, phone: value || '' }))}
+                    className="border rounded-md p-2"
                   />
                 </div>
               </>
@@ -261,12 +382,15 @@ export default function Signup() {
               Next
             </Button>
           ) : (
-            <Button onClick={handleSubmit}>
-              Complete Signup
+            <Button onClick={handleSubmit} disabled={loading}>
+              {loading ? 'Signing up...' : 'Complete Signup'}
             </Button>
           )}
         </CardFooter>
       </Card>
+      <div className="text-sm text-center">
+        Already have an account? <Link href="/login" className="text-blue-500 hover:underline">Log in</Link>
+      </div>
     </div>
   )
 }
