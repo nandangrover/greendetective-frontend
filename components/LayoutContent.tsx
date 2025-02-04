@@ -47,7 +47,7 @@ const BackgroundVideo = () => {
       loop
       muted
       playsInline
-      className={`absolute h-full w-full object-cover transition-opacity duration-1500 ${
+      className={`absolute h-full w-full object-cover transition-opacity duration-100 ${
         isLoaded ? 'opacity-20' : 'opacity-0'
       }`}
       onLoadedData={handleVideoLoaded}
@@ -98,7 +98,7 @@ const BackgroundImage = ({ src }: { src: string }) => {
         src={src}
         alt="Abstract green background"
         fill
-        className={`object-cover transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        className={`object-cover transition-all duration-100 ease-[cubic-bezier(0.4,0,0.2,1)] ${
           isLoaded ? 'opacity-20 scale-100' : 'opacity-0 scale-105'
         }`}
         priority={false}
