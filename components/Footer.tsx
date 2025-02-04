@@ -51,11 +51,11 @@ export function Footer({ minimal = false }: FooterProps) {
           <div>
             <h4 className="font-medium mb-3">Platform</h4>
             <div className="space-y-2">
-              <Link href="/about" className="block text-gray-300 hover:text-white text-sm">About</Link>
+              <Link href="/about" className="block text-gray-300 hover:text-white text-sm">About Us</Link>
               <Link href="/pricing" className="block text-gray-300 hover:text-white text-sm">Pricing</Link>
-              <Link href="/resources" className="block text-gray-300 hover:text-white text-sm">Resources</Link>
+              <Link href="/resources" className="block text-gray-300 hover:text-white text-sm">Blog & Resources</Link>
+              <Link href="/roadmap" className="block text-gray-300 hover:text-white text-sm">Product Roadmap</Link>
               <Link href="/policies" className="block text-gray-300 hover:text-white text-sm">Privacy Policy</Link>
-              <Link href="/future" className="block text-gray-300 hover:text-white text-sm">Future</Link>
             </div>
           </div>
 

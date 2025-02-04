@@ -23,8 +23,8 @@ export default function Future() {
       <div className="space-y-8">
         {/* Timeline Section */}
         <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute left-4 md:left-1/2 h-full w-0.5 bg-border" />
+          {/* Timeline Line - adjusted for mobile */}
+          <div className="absolute left-4 md:left-1/2 h-full w-0.5 bg-border transform md:-translate-x-1/2" />
 
           {/* Timeline Items */}
           <div className="space-y-16">
@@ -267,19 +267,22 @@ function RoadmapSection({ date, items }: {
   return (
     <div className="relative">
       {/* Date Marker */}
-      <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-3 py-1 rounded-full border text-sm font-medium">
+      <div className="absolute left-0 md:left-1/2 -translate-y-1/2 md:-translate-x-1/2 bg-background px-3 py-1 rounded-full border text-sm font-medium ml-16 md:ml-0">
         {date}
       </div>
 
       {/* Items */}
-      <div className="pt-8 space-y-4">
+      <div className="pt-8 space-y-4 relative">
         {items.map((item, i) => (
-          <div key={i} className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4">
-            {/* Left Spacer */}
+          <div key={i} className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 relative">
+            {/* Timeline dot for mobile */}
+            <div className="absolute left-[15px] top-1/2 w-3 h-3 bg-primary rounded-full md:hidden" />
+            
+            {/* Left column - visible only on desktop */}
             <div className="hidden md:block" />
 
-            {/* Item Card */}
-            <Card className="bg-background/30 backdrop-blur-sm hover:shadow-lg transition-shadow">
+            {/* Item Card - adjusted for mobile */}
+            <Card className="bg-background/30 backdrop-blur-sm hover:shadow-lg transition-shadow ml-8 md:ml-0">
               <CardHeader className="flex flex-row items-start space-x-4">
                 <div className="p-2 bg-primary/10 rounded-lg text-primary">
                   {item.icon}
@@ -296,7 +299,7 @@ function RoadmapSection({ date, items }: {
               </CardContent>
             </Card>
 
-            {/* Right Spacer */}
+            {/* Right column - visible only on desktop */}
             <div className="hidden md:block" />
           </div>
         ))}

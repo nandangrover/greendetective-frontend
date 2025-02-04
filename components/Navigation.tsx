@@ -43,6 +43,11 @@ export function Navigation() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
+                <Link href="/roadmap" className="w-full cursor-pointer">
+                  Product Roadmap
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
                 <Link href="/about" className="w-full cursor-pointer">
                   About Us
                 </Link>
