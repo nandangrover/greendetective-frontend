@@ -83,21 +83,21 @@ export default function Future() {
               date="Phase 3 - ESG Intelligence"
               items={[
                 {
-                  icon: <Globe className="h-6 w-6" />,
-                  title: "Global Coverage",
-                  description: "Multi-language and regional analysis",
+                  icon: <Database className="h-6 w-6" />,
+                  title: "Advanced Data Collection",
+                  description: "Real-time web scraping and document processing",
                   status: "Planned"
                 },
                 {
-                  icon: <BookOpen className="h-6 w-6" />,
-                  title: "ESG Academy",
-                  description: "Training and certification programs",
+                  icon: <FileText className="h-6 w-6" />,
+                  title: "Regulatory Analysis",
+                  description: "Comprehensive regulatory filing analysis",
                   status: "Planned"
                 },
                 {
-                  icon: <Settings className="h-6 w-6" />,
-                  title: "API Access",
-                  description: "Developer tools and integrations",
+                  icon: <Shield className="h-6 w-6" />,
+                  title: "Compliance Assessments",
+                  description: "Regulatory compliance and risk analysis",
                   status: "Planned"
                 }
               ]}
@@ -108,21 +108,21 @@ export default function Future() {
               date="Phase 4 - Industry Standard"
               items={[
                 {
-                  icon: <QrCode className="h-6 w-6" />,
-                  title: "Verification Badges",
-                  description: "Public trust indicators for companies",
-                  status: "Planned"
-                },
-                {
-                  icon: <MapPin className="h-6 w-6" />,
-                  title: "Geospatial Analysis",
-                  description: "Location-based ESG impact assessment",
+                  icon: <TrendingUp className="h-6 w-6" />,
+                  title: "Custom Scoring Models",
+                  description: "Tailored ESG scoring for stakeholders",
                   status: "Planned"
                 },
                 {
                   icon: <BarChart3 className="h-6 w-6" />,
-                  title: "Advanced Analytics",
-                  description: "Industry benchmarking and trend analysis",
+                  title: "Impact Measurement",
+                  description: "Comprehensive ESG impact analysis",
+                  status: "Planned"
+                },
+                {
+                  icon: <Users className="h-6 w-6" />,
+                  title: "Stakeholder Reporting",
+                  description: "Customized reports for different stakeholders",
                   status: "Planned"
                 }
               ]}
@@ -156,14 +156,14 @@ export default function Future() {
             />
             <EvolutionPhase
               title="Phase 3"
-              subtitle="ESG Intelligence"
-              description="Global coverage and training programs"
-              icon={<Globe className="h-6 w-6" />}
+              subtitle="Data Intelligence"
+              description="Advanced data collection and analysis"
+              icon={<Database className="h-6 w-6" />}
             />
             <EvolutionPhase
               title="Phase 4"
-              subtitle="Industry Standard"
-              description="Advanced analytics and verification badges"
+              subtitle="Industry Leadership"
+              description="Custom scoring and impact measurement"
               icon={<TrendingUp className="h-6 w-6" />}
             />
           </CardContent>
