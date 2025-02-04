@@ -10,7 +10,7 @@ import { AuthProvider } from "@/lib/auth/auth-provider";
 
 export function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const fullFooterRoutes = ["/", "/about", "/pricing", "/policies", "/future", "/contact"];
+  const fullFooterRoutes = ["/", "/about", "/pricing", "/policies", "/roadmap", "/contact"];
   const showMinimalFooter = !(fullFooterRoutes.includes(pathname) || pathname.startsWith('/resources'));
   
   // Don't show video background on resource pages
