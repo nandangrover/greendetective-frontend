@@ -47,7 +47,7 @@ const BackgroundVideo = () => {
       loop
       muted
       playsInline
-      className={`absolute h-full w-full object-cover transition-opacity duration-1000 ${
+      className={`absolute h-full w-full object-cover transition-opacity duration-1500 ${
         isLoaded ? 'opacity-20' : 'opacity-0'
       }`}
       onLoadedData={handleVideoLoaded}
