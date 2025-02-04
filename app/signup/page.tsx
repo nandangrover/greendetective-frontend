@@ -218,18 +218,18 @@ export default function Signup() {
   }
 
   return (
-    <div className="space-y-4">
-      <Card className="w-[400px] mx-auto">
+    <div className="space-y-4 px-4">
+      <Card className="w-full max-w-[400px] mx-auto">
         <CardHeader>
-          <CardTitle>Sign Up</CardTitle>
-          <CardDescription>Step {step} of 3</CardDescription>
-          <Progress value={step * 33.33} className="mt-2" />
+          <CardTitle className="text-xl">Sign Up</CardTitle>
+          <CardDescription className="text-sm">Step {step} of 3</CardDescription>
+          <Progress value={step * 33.33} className="mt-2 h-2" />
         </CardHeader>
         <CardContent>
           <form className="space-y-4">
             {step === 1 && (
               <>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="inviteCode" className="block text-sm font-medium text-foreground">Invite Code</label>
                   <Input
                     type="text"
@@ -238,9 +238,10 @@ export default function Signup() {
                     value={formData.inviteCode}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="email" className="block text-sm font-medium text-foreground">Email</label>
                   <Input
                     type="email"
@@ -249,9 +250,10 @@ export default function Signup() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="password" className="block text-sm font-medium text-foreground">Password</label>
                   <Input
                     type="password"
@@ -260,9 +262,10 @@ export default function Signup() {
                     value={formData.password}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground">Confirm Password</label>
                   <Input
                     type="password"
@@ -271,6 +274,7 @@ export default function Signup() {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
               </>
@@ -278,7 +282,7 @@ export default function Signup() {
 
             {step === 2 && (
               <>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="businessName" className="block text-sm font-medium text-foreground">Business Name</label>
                   <Input
                     type="text"
@@ -287,9 +291,10 @@ export default function Signup() {
                     value={formData.businessName}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="website" className="block text-sm font-medium text-foreground">Website</label>
                   <Input
                     type="url"
@@ -298,9 +303,10 @@ export default function Signup() {
                     value={formData.website}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="industry" className="block text-sm font-medium text-foreground">Industry</label>
                   <Input
                     type="text"
@@ -309,14 +315,16 @@ export default function Signup() {
                     value={formData.industry}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="companySize" className="block text-sm font-medium text-foreground">Company Size</label>
                   <Select
                     value={formData.companySize}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, companySize: value }))}
                     required
+                    className="text-sm"
                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select company size" />
@@ -335,7 +343,7 @@ export default function Signup() {
 
             {step === 3 && (
               <>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="username" className="block text-sm font-medium text-foreground">Username</label>
                   <Input
                     type="text"
@@ -344,9 +352,10 @@ export default function Signup() {
                     value={formData.username}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="jobTitle" className="block text-sm font-medium text-foreground">Job Title</label>
                   <Input
                     type="text"
@@ -355,40 +364,41 @@ export default function Signup() {
                     value={formData.jobTitle}
                     onChange={handleChange}
                     required
+                    className="text-sm"
                   />
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label htmlFor="phone" className="block text-sm font-medium text-foreground">Phone</label>
                   <PhoneInput
                     international
                     defaultCountry="GB"
                     value={formData.phone}
                     onChange={(value) => setFormData(prev => ({ ...prev, phone: value || '' }))}
-                    className="border rounded-md p-2"
+                    className="border rounded-md p-2 text-sm"
                   />
                 </div>
               </>
             )}
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
+        <CardFooter className="flex justify-between gap-2">
           {step > 1 && (
-            <Button variant="outline" onClick={prevStep}>
+            <Button variant="outline" onClick={prevStep} className="text-sm">
               Previous
             </Button>
           )}
           {step < 3 ? (
-            <Button onClick={nextStep} className={step === 1 ? "w-full" : ""}>
+            <Button onClick={nextStep} className={step === 1 ? "w-full text-sm" : "text-sm"}>
               Next
             </Button>
           ) : (
-            <Button onClick={handleSubmit} disabled={loading}>
+            <Button onClick={handleSubmit} disabled={loading} className="text-sm">
               {loading ? 'Signing up...' : 'Complete Signup'}
             </Button>
           )}
         </CardFooter>
       </Card>
-      <div className="text-sm text-center">
+      <div className="text-sm text-center px-4">
         Already have an account? <Link href="/login" className="text-blue-500 hover:underline">Log in</Link>
       </div>
     </div>

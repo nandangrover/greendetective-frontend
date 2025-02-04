@@ -125,11 +125,11 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
 
   // Memoize the background image selection
   const currentBackground = useMemo(() => {
-    if (pathname === "/") return BACKGROUND_IMAGES.home;
-    if (pathname === "/about") return BACKGROUND_IMAGES.about;
-    if (pathname === "/pricing") return BACKGROUND_IMAGES.pricing;
-    if (pathname.startsWith('/resources')) return BACKGROUND_IMAGES.resources;
-    return BACKGROUND_IMAGES.default;
+    // if (pathname === "/") return BACKGROUND_IMAGES.home;
+    // if (pathname === "/about") return BACKGROUND_IMAGES.about;
+    // if (pathname === "/pricing") return BACKGROUND_IMAGES.pricing;
+    // if (pathname.startsWith('/resources')) return BACKGROUND_IMAGES.resources;
+    return BACKGROUND_IMAGES.resources;
   }, [pathname]);
 
   // Get next possible backgrounds for preloading

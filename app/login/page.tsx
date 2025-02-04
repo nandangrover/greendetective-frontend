@@ -104,15 +104,15 @@ export default function Login() {
   };
 
   return (
-    <div className="space-y-4">
-      <Card className="w-[400px] mx-auto">
+    <div className="space-y-4 px-4">
+      <Card className="w-full max-w-[400px] mx-auto">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Enter your credentials to access your account</CardDescription>
+          <CardTitle className="text-xl">Login</CardTitle>
+          <CardDescription className="text-sm">Enter your credentials to access your account</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-4" onSubmit={handleSubmit}>
-            <div>
+            <div className="space-y-2">
               <label htmlFor="email" className="block text-sm font-medium text-foreground">Email</label>
               <Input
                 type="email"
@@ -121,9 +121,10 @@ export default function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                className="text-sm"
               />
             </div>
-            <div>
+            <div className="space-y-2">
               <label htmlFor="password" className="block text-sm font-medium text-foreground">Password</label>
               <Input
                 type="password"
@@ -132,14 +133,15 @@ export default function Login() {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                className="text-sm"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full text-sm" disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-2">
+        <CardFooter className="flex flex-col space-y-2 px-4">
           <div className="text-sm text-center">
             Don't have an account? <Link href="/signup" className="text-blue-500 hover:underline">Sign up</Link>
           </div>
@@ -156,7 +158,7 @@ export default function Login() {
                   </Link>
                 </div>
               </TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent className="text-sm">
                 <p>Password reset will be available after beta.<br />Please contact support for assistance.</p>
               </TooltipContent>
             </Tooltip>

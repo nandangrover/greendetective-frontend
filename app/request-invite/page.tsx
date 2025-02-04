@@ -70,56 +70,64 @@ export default function RequestInvite() {
   }
 
   return (
-    <Card className="w-[400px] mx-auto">
-      <CardHeader>
-        <CardTitle>Request Beta Access</CardTitle>
-        <CardDescription>
-          Join our private beta program to start detecting greenwashing claims.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-foreground">Full Name</label>
-            <Input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-foreground">Work Email</label>
-            <Input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-foreground">Company Name</label>
-            <Input
-              type="text"
-              id="companyName"
-              name="companyName"
-              value={formData.companyName}
-              onChange={handleChange}
-              required
-              className="mt-1"
-            />
-          </div>
-        </form>
-      </CardContent>
-      <CardFooter>
-        <Button onClick={handleSubmit} className="w-full" disabled={isSubmitting}>Submit Request</Button>
-      </CardFooter>
-    </Card>
+    <div className="space-y-4 px-4">
+      <Card className="w-full max-w-[400px] mx-auto">
+        <CardHeader>
+          <CardTitle className="text-xl">Request Beta Access</CardTitle>
+          <CardDescription className="text-sm">
+            Join our private beta program to start detecting greenwashing claims.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="block text-sm font-medium text-foreground">Full Name</label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="text-sm"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground">Work Email</label>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="text-sm"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="companyName" className="block text-sm font-medium text-foreground">Company Name</label>
+              <Input
+                type="text"
+                id="companyName"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+                required
+                className="text-sm"
+              />
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter>
+          <Button 
+            onClick={handleSubmit} 
+            className="w-full text-sm" 
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit Request'}
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   )
 } 
