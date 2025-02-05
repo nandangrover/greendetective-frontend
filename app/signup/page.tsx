@@ -324,7 +324,6 @@ export default function Signup() {
                     value={formData.companySize}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, companySize: value }))}
                     required
-                    className="text-sm"
                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select company size" />
