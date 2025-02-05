@@ -1,11 +1,52 @@
 import Link from "next/link"
 import { Mail, LinkedinIcon, X } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import { useState } from "react"
 
 interface FooterProps {
   minimal?: boolean;
 }
 
 export function Footer({ minimal = false }: FooterProps) {
+  const { toast } = useToast()
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email })
+      })
+
+      const data = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Subscription failed')
+      }
+
+      toast({
+        title: 'Success!',
+        description: 'You have been subscribed to our newsletter.',
+      })
+      setEmail('')
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Subscription Error',
+        description: error instanceof Error ? error.message : 'Failed to subscribe',
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
   if (minimal) {
     return (
       <footer className="py-4 px-4 bg-transparent backdrop-blur-sm text-center mt-auto">
@@ -34,16 +75,23 @@ export function Footer({ minimal = false }: FooterProps) {
         <div className="flex flex-col items-center text-center mb-8 sm:mb-16">
           <h3 className="text-base sm:text-lg font-medium uppercase tracking-wider mb-3">Newsletter</h3>
           <p className="text-gray-300 text-sm mb-4 sm:mb-6 px-2">Stay updated with the latest on greenwashing detection and sustainability</p>
-          <div className="flex w-full max-w-md px-2">
+          <form onSubmit={handleSubscribe} className="flex w-full max-w-md px-2">
             <input 
               type="email" 
               placeholder="Email" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="flex-1 px-3 sm:px-4 py-2 bg-white/5 border-t border-b border-l border-white/10 text-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-primary rounded-l-lg text-sm"
+              required
             />
-            <button className="px-4 sm:px-8 py-2 bg-primary hover:bg-primary/90 text-white font-medium text-sm transition-colors rounded-r-lg">
-              Subscribe
+            <button 
+              type="submit" 
+              disabled={loading}
+              className="px-4 sm:px-8 py-2 bg-primary hover:bg-primary/90 text-white font-medium text-sm transition-colors rounded-r-lg disabled:opacity-50"
+            >
+              {loading ? 'Subscribing...' : 'Subscribe'}
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Main Footer Content */}
