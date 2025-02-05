@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: {
-    default: "GreenDetective - AI-Powered Greenwashing Detection",
+    default: "GreenDetective",
     template: "%s | GreenDetective"
   },
   description: "Detect and prevent greenwashing with our AI-powered platform. Verify environmental claims, analyze corporate communications, and ensure ESG compliance.",
