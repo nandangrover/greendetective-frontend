@@ -3,6 +3,15 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Logo } from "@/components/Logo";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Policies - GreenDetective',
+  description: 'Our privacy and cookie policies',
+  alternates: {
+    canonical: 'https://www.greendetective.earth/policies',
+  },
+};
 
 export default function PoliciesPage() {
   return (

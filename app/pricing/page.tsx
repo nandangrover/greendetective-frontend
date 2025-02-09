@@ -7,6 +7,15 @@ import {
   CardFooter,
   CardTitle,
 } from "@/components/ui/card"
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Pricing - GreenDetective',
+  description: 'Choose your plan for greenwashing detection',
+  alternates: {
+    canonical: 'https://www.greendetective.earth/pricing',
+  },
+};
 
 export default function Pricing() {
   return (

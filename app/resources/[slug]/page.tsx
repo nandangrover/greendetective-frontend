@@ -7,6 +7,7 @@ import { getPostData } from '@/lib/mdxUtils'
 import { SocialShareButtons } from '@/components/SocialShareButtons'
 import { MdxContent } from '@/components/MdxContent'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { Metadata } from 'next'
 
 interface Post {
   content: MDXRemoteSerializeResult
@@ -19,6 +20,24 @@ interface Post {
     role: string
   }
   image: string
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getPostData(params.slug) as Post
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/resources/${params.slug}`
+  
+  return {
+    title: `${post.title} - GreenDetective Resources`,
+    description: `Read our comprehensive resource on ${post.title} to learn more about environmental claims and greenwashing detection.`,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${post.title} - GreenDetective Resources`,
+      description: `Read our comprehensive resource on ${post.title} to learn more about environmental claims and greenwashing detection.`,
+      url: url,
+    }
+  }
 }
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {

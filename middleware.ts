@@ -15,6 +15,13 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // Ensure no trailing slashes
+  if (request.nextUrl.pathname.endsWith('/') && request.nextUrl.pathname !== '/') {
+    return NextResponse.redirect(
+      new URL(request.nextUrl.pathname.slice(0, -1), request.url)
+    )
+  }
+
   return NextResponse.next()
 }
 

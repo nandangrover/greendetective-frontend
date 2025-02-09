@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "About GreenDetective - Our Mission and Vision",
   description: "Learn about GreenDetective's mission to combat greenwashing through AI-powered environmental claim verification and our vision for corporate accountability.",
   alternates: {
-    canonical: '/about',
+    canonical: 'https://www.greendetective.earth/about',
   },
   openGraph: {
     title: "About GreenDetective - Our Mission and Vision",
