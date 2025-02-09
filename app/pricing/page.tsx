@@ -100,7 +100,7 @@ export default function Pricing() {
           </CardContent>
           <CardFooter>
             <Button asChild className="w-full" variant="outline">
-              <a href="mailto:enterprise@greendetective.earth" className="text-accent-foreground">Contact Sales</a>
+              <a href="mailto:info@greendetective.earth" className="text-accent-foreground">Contact Sales</a>
             </Button>
           </CardFooter>
         </Card>

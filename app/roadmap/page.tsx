@@ -5,10 +5,25 @@ import { Rocket, Users, FileText, Settings, QrCode, MapPin, BookOpen, Shield, Tr
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
+import { motion } from "framer-motion"
+
+// Add these animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+}
 
 export default function Future() {
   return (
-    <div className="container max-w-7xl mx-auto px-4 py-12 space-y-12">
+    <div className="container max-w-7xl mx-auto px-3 md:px-4 py-8 md:py-12 space-y-8 md:space-y-12">
       {/* Hero Section */}
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold tracking-tight text-foreground">
@@ -31,6 +46,7 @@ export default function Future() {
             {/* Phase 1 - Foundation */}
             <RoadmapSection
               date="Phase 1 - Greenwashing Detection"
+              timeframe="Q1 2024"
               items={[
                 {
                   icon: <Rocket className="h-6 w-6" />,
@@ -56,6 +72,7 @@ export default function Future() {
             {/* Phase 2 - Expansion */}
             <RoadmapSection
               date="Phase 2 - Comprehensive Analysis"
+              timeframe="Q2-Q3 2024"
               items={[
                 {
                   icon: <Users className="h-6 w-6" />,
@@ -81,6 +98,7 @@ export default function Future() {
             {/* Phase 3 - Maturity */}
             <RoadmapSection
               date="Phase 3 - ESG Intelligence"
+              timeframe="Q4 2024"
               items={[
                 {
                   icon: <Database className="h-6 w-6" />,
@@ -106,6 +124,7 @@ export default function Future() {
             {/* Phase 4 - Leadership */}
             <RoadmapSection
               date="Phase 4 - Industry Standard"
+              timeframe="Q1-Q2 2025"
               items={[
                 {
                   icon: <TrendingUp className="h-6 w-6" />,
@@ -255,8 +274,9 @@ export default function Future() {
   )
 }
 
-function RoadmapSection({ date, items }: {
+function RoadmapSection({ date, timeframe, items }: {
   date: string,
+  timeframe: string,
   items: {
     icon: React.ReactNode,
     title: string,
@@ -266,44 +286,66 @@ function RoadmapSection({ date, items }: {
 }) {
   return (
     <div className="relative">
-      {/* Date Marker */}
-      <div className="absolute left-0 md:left-1/2 -translate-y-1/2 md:-translate-x-1/2 bg-background px-3 py-1 rounded-full border text-sm font-medium ml-16 md:ml-0">
-        {date}
+      {/* Date Marker - Adjusted positioning and sizing for mobile */}
+      <div 
+        className="absolute left-0 md:left-1/2 top-0 -translate-y-1/2 md:-translate-x-1/2 ml-12 md:ml-0 z-10"
+      >
+        <motion.div 
+          className="bg-background px-3 md:px-4 py-1.5 md:py-2 rounded-full border text-sm font-medium flex flex-col items-center space-y-0.5 md:space-y-1 cursor-default"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="font-semibold text-sm md:text-base">{date}</span>
+          <span className="text-[10px] md:text-xs text-muted-foreground tracking-wide">{timeframe}</span>
+        </motion.div>
       </div>
 
-      {/* Items */}
-      <div className="pt-8 space-y-4 relative">
+      {/* Items Container - Adjusted spacing */}
+      <motion.div 
+        className="pt-12 md:pt-16 space-y-4 relative"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+      >
         {items.map((item, i) => (
-          <div key={i} className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-4 relative">
-            {/* Timeline dot for mobile */}
-            <div className="absolute left-[15px] top-1/2 w-3 h-3 bg-primary rounded-full md:hidden" />
+          <motion.div 
+            key={i} 
+            className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-4 relative"
+            variants={itemVariants}
+          >
+            {/* Timeline dot - Adjusted positioning */}
+            <div className="absolute left-[13px] top-1/2 w-2.5 h-2.5 bg-primary rounded-full md:hidden" />
             
-            {/* Left column - visible only on desktop */}
+            {/* Left column */}
             <div className="hidden md:block" />
 
-            {/* Item Card - adjusted for mobile */}
-            <Card className="bg-background/30 backdrop-blur-sm hover:shadow-lg transition-shadow ml-8 md:ml-0">
-              <CardHeader className="flex flex-row items-start space-x-4">
-                <div className="p-2 bg-primary/10 rounded-lg text-primary">
+            {/* Item Card - Improved mobile layout */}
+            <Card className="bg-background/30 backdrop-blur-sm hover:shadow-lg transition-shadow ml-6 md:ml-0">
+              <CardHeader className="flex flex-row items-start space-x-3 md:space-x-4 p-4 md:p-6">
+                <div className="p-1.5 md:p-2 bg-primary/10 rounded-lg text-primary shrink-0">
                   {item.icon}
                 </div>
                 <div>
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
+                  <CardTitle className="text-base md:text-lg">{item.title}</CardTitle>
+                  <CardDescription className="text-sm">{item.description}</CardDescription>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="text-sm text-muted-foreground">
+              <CardContent className="p-4 md:p-6 pt-0 md:pt-0">
+                <div className="text-xs md:text-sm text-muted-foreground">
                   Status: <span className="font-medium">{item.status}</span>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Right column - visible only on desktop */}
+            {/* Right column */}
             <div className="hidden md:block" />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }
@@ -335,13 +377,19 @@ function PartnershipCard({ title, description, icon }: {
   icon: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col items-center text-center space-y-4">
+    <motion.div 
+      className="flex flex-col items-center text-center space-y-4"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="p-3 bg-primary/10 rounded-full text-primary">
         {icon}
       </div>
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="text-sm text-muted-foreground">{description}</p>
-    </div>
+    </motion.div>
   )
 }
 
@@ -352,7 +400,13 @@ function EvolutionPhase({ title, subtitle, description, icon }: {
   icon: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col items-center text-center space-y-4">
+    <motion.div 
+      className="flex flex-col items-center text-center space-y-4"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="p-3 bg-primary/10 rounded-full text-primary">
         {icon}
       </div>
@@ -361,6 +415,6 @@ function EvolutionPhase({ title, subtitle, description, icon }: {
         <p className="text-sm text-muted-foreground">{subtitle}</p>
       </div>
       <p className="text-sm text-muted-foreground">{description}</p>
-    </div>
+    </motion.div>
   )
 } 
