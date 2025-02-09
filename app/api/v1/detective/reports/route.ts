@@ -1,7 +1,7 @@
 import { jsonResponse, errorResponse } from '../../../utils'
 import { serverAuthenticatedFetch } from '@/lib/server/auth'
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8000'
+const BACKEND_URL = process.env.BANEXT_PUBLIC_BACKEND_URLCKEND_URL || 'http://localhost:8000'
 
 export const dynamic = 'force-dynamic'
 

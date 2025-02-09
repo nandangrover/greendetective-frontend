@@ -1,7 +1,6 @@
-import { NextResponse } from 'next/server'
 import { errorResponse, jsonResponse } from '../../../utils'
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
 
 export async function POST(request: Request) {
   try {
@@ -18,7 +17,6 @@ export async function POST(request: Request) {
     if (!emailRegex.test(email)) {
       return errorResponse('Please provide a valid email address', 400)
     }
-
     // Send request to backend
     const response = await fetch(`${BACKEND_URL}/api/v1/detective/request-invite/`, {
       method: 'POST',
