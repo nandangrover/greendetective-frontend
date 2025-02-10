@@ -34,6 +34,7 @@ export default function Login() {
   const { login, isAuthenticated } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
     if (searchParams.get("verified") === "true") {
@@ -47,9 +48,11 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push('/reports');
+      const returnUrl = searchParams.get('returnUrl') || '/reports';
+      router.push(returnUrl);
     }
-  }, [isAuthenticated, router]);
+    setIsCheckingAuth(false);
+  }, [isAuthenticated, router, searchParams]);
 
   const validateForm = () => {
     if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -104,67 +107,75 @@ export default function Login() {
   };
 
   return (
-    <div className="space-y-4 px-4">
-      <Card className="w-full max-w-[400px] mx-auto">
-        <CardHeader>
-          <CardTitle className="text-xl">Login</CardTitle>
-          <CardDescription className="text-sm">Enter your credentials to access your account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-foreground">Email</label>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="text-sm"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-foreground">Password</label>
-              <Input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="text-sm"
-              />
-            </div>
-            <Button type="submit" className="w-full text-sm" disabled={loading}>
-              {loading ? 'Logging in...' : 'Login'}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-2 px-4">
-          <div className="text-sm text-center">
-            Don't have an account? <Link href="/signup" className="text-blue-500 hover:underline">Sign up</Link>
-          </div>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div>
-                  <Link 
-                    href="#" 
-                    className="text-sm text-blue-500 hover:underline pointer-events-none opacity-50"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Reset Password
-                  </Link>
+    <>
+      {isCheckingAuth ? (
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        </div>
+      ) : (
+        <div className="space-y-4 px-4">
+          <Card className="w-full max-w-[400px] mx-auto">
+            <CardHeader>
+              <CardTitle className="text-xl">Login</CardTitle>
+              <CardDescription className="text-sm">Enter your credentials to access your account</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="space-y-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground">Email</label>
+                  <Input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="text-sm"
+                  />
                 </div>
-              </TooltipTrigger>
-              <TooltipContent className="text-sm">
-                <p>Password reset will be available after beta.<br />Please contact support for assistance.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </CardFooter>
-      </Card>
-    </div>
+                <div className="space-y-2">
+                  <label htmlFor="password" className="block text-sm font-medium text-foreground">Password</label>
+                  <Input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    className="text-sm"
+                  />
+                </div>
+                <Button type="submit" className="w-full text-sm" disabled={loading}>
+                  {loading ? 'Logging in...' : 'Login'}
+                </Button>
+              </form>
+            </CardContent>
+            <CardFooter className="flex flex-col space-y-2 px-4">
+              <div className="text-sm text-center">
+                Don't have an account? <Link href="/signup" className="text-blue-500 hover:underline">Sign up</Link>
+              </div>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div>
+                      <Link 
+                        href="#" 
+                        className="text-sm text-blue-500 hover:underline pointer-events-none opacity-50"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Reset Password
+                      </Link>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="text-sm">
+                    <p>Password reset will be available after beta.<br />Please contact support for assistance.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </CardFooter>
+          </Card>
+        </div>
+      )}
+    </>
   );
 }
