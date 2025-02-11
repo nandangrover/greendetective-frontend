@@ -10,6 +10,8 @@ export async function GET(
   try {
     const { token } = params
 
+    console.log('Token:', token)
+
     // Call the backend verification endpoint
     const response = await fetch(`${BACKEND_URL}/api/v1/detective/verify-email/`, {
       method: 'POST',
@@ -22,8 +24,7 @@ export async function GET(
     })
 
     if (!response.ok) {
-      const errorData = await response.json()
-      return errorResponse(errorData.message || 'Verification failed', response.status)
+      return NextResponse.redirect(new URL('/login?verified=false', request.url))
     }
 
     const data = await response.json()

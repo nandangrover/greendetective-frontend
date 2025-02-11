@@ -167,24 +167,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error(error.message || 'Signup failed')
     }
 
-    const { access, refresh } = await response.json()
-    const user = await fetchUserDetails(access)
-
-    const newAuthState = {
-      user,
-      isAuthenticated: true,
-      tokens: {
-        access,
-        refresh,
-      },
-    }
-
-    setAuthState(newAuthState)
-    localStorage.setItem('auth', JSON.stringify({
-      ...newAuthState,
-      expiresAt: Date.now() + (STORAGE_EXPIRATION_TIME * 1000),
-    }))
-    setAuthStateForAPI(newAuthState)
+    const { message } = await response.json()
+    return "Account created successfully. Please check your email to verify your account before logging in."
   }
 
   const fetchUserDetails = async (token: string) => {

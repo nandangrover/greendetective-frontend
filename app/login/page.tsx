@@ -43,6 +43,13 @@ export default function Login() {
         description:
           "Your email has been successfully verified. You can now login.",
       });
+    } else if (searchParams.get("verified") === "false") {
+      toast({
+        variant: "destructive",
+        title: "Email Verification Failed",
+        description:
+          "The email verification link is invalid or has expired. Please try again.",
+      });
     }
   }, [searchParams, toast]);
 

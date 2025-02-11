@@ -201,9 +201,9 @@ export default function Signup() {
       
       toast({
         title: 'Signup Successful!',
-        description: 'Your account has been created successfully.',
+        description: 'Account created. Please check your email to verify your account.',
       })
-      router.push('/reports')
+      router.push('/login')
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Signup failed'
       setError(errorMessage)
