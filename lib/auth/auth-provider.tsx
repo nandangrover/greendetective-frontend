@@ -167,8 +167,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error(error.message || 'Signup failed')
     }
 
-    const { message } = await response.json()
-    return "Account created successfully. Please check your email to verify your account before logging in."
+    await response.json()
   }
 
   const fetchUserDetails = async (token: string) => {
