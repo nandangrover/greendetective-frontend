@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { errorResponse, jsonResponse } from '../../../../utils'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 export async function GET(
   request: Request,
@@ -10,9 +11,6 @@ export async function GET(
   try {
     const { token } = params
 
-    console.log('Token:', token)
-
-    // Call the backend verification endpoint
     const response = await fetch(`${BACKEND_URL}/api/v1/detective/verify-email/`, {
       method: 'POST',
       headers: {
@@ -24,11 +22,11 @@ export async function GET(
     })
 
     if (!response.ok) {
-      return NextResponse.redirect(new URL('/login?verified=false', request.url))
+      return NextResponse.redirect(new URL(`${SITE_URL}/login?verified=false`))
     }
 
     const data = await response.json()
-    return NextResponse.redirect(new URL('/login?verified=true', request.url))
+    return NextResponse.redirect(new URL(`${SITE_URL}/login?verified=true`))
   } catch (error) {
     console.error('Verification error:', error)
     return errorResponse('An error occurred during verification', 500)
