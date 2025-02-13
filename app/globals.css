@@ -46,6 +46,39 @@ body {
     --border: 200 25% 18%;
     --input: 200 25% 18%;
     --ring: 142 70% 35%;
+
+    /* Light Theme Colors */
+    --background: 0 0% 100%;  /* White */
+    --foreground: 0 0% 20%;   /* Dark gray for text */
+    
+    /* Card and Popover */
+    --card: 0 0% 98%;  /* Very light gray */
+    --card-foreground: 0 0% 20%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 0 0% 20%;
+    
+    /* Primary Actions */
+    --primary: 74 85% 20%;  /* Olive green */
+    --primary-foreground: 0 0% 100%;  /* White */
+    
+    /* Secondary Elements */
+    --secondary: 74 70% 30%;  /* Darker olive */
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Interactive Elements */
+    --muted: 0 0% 96%;  /* Very light gray */
+    --muted-foreground: 0 0% 50%;  /* Medium gray */
+    --accent: 74 60% 40%;  /* Muted olive accent */
+    --accent-foreground: 0 0% 100%;
+    
+    /* Destructive Actions */
+    --destructive: 0 75% 42%;  /* Rich warning red */
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Borders and Forms */
+    --border: 0 0% 90%;  /* Light gray */
+    --input: 0 0% 90%;
+    --ring: 142 70% 35%;  /* Green */
   }
 
   /* Nature Theme */

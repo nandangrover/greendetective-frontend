@@ -1,11 +1,13 @@
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export function getServerAuthHeader() {
   const cookieStore = cookies()
   const accessToken = cookieStore.get('access_token')?.value
 
   if (!accessToken) {
-    return null
+    // Redirect to logout if no access token is found
+    redirect('/logout')
   }
 
   return `Bearer ${accessToken}`
