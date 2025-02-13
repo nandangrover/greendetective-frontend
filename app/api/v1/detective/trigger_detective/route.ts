@@ -44,4 +44,3 @@ export async function POST(request: Request) {
     return errorResponse('An error occurred while triggering the analysis', 500)
   }
 }
-

@@ -11,6 +11,7 @@ import Image from "next/image";
 import Head from "next/head";
 import { useMemo, useEffect, useState } from "react";
 import { Suspense } from "react";
+import { GoogleAnalytics } from './GoogleAnalytics'
 
 // Define background images in a constant
 const BACKGROUND_IMAGES = {
@@ -183,6 +184,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
             href={bg}
           />
         ))}
+        <GoogleAnalytics />
       </Head>
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
