@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { LayoutContent } from '@/components/LayoutContent';
 import { Toaster } from "@/components/ui/toaster"
-
+import { GoogleAnalytics } from "@/components/GoogleAnalytics"
 export const metadata: Metadata = {
   title: {
     default: "GreenDetective",
@@ -76,6 +76,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleAnalytics />
       <body className="min-h-screen bg-background min-h-screen bg-gradient-to-b from-background/80 via-muted/20 to-primary/10">
       <Toaster />
         <LayoutContent>

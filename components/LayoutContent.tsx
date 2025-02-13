@@ -11,7 +11,6 @@ import Image from "next/image";
 import Head from "next/head";
 import { useMemo, useEffect, useState } from "react";
 import { Suspense } from "react";
-import { GoogleAnalytics } from './GoogleAnalytics'
 
 // Define background images in a constant
 const BACKGROUND_IMAGES = {
@@ -105,7 +104,7 @@ const BackgroundImage = ({ src }: { src: string }) => {
         priority={false}
         quality={90}
         loading="lazy"
-        onLoadingComplete={() => setIsLoaded(true)}
+        onLoad={() => setIsLoaded(true)}
         placeholder="blur"
         blurDataURL={blurDataURL}
         style={{
@@ -184,7 +183,6 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
             href={bg}
           />
         ))}
-        <GoogleAnalytics />
       </Head>
 
       <div className="fixed inset-0 -z-10 overflow-hidden bg-black">

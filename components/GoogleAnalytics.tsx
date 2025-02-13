@@ -4,6 +4,7 @@ import Script from 'next/script'
 
 export function GoogleAnalytics() {
   const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
+  console.log('GA_TRACKING_ID', GA_TRACKING_ID)
 
   if (!GA_TRACKING_ID) {
     return null
