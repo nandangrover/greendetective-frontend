@@ -58,7 +58,7 @@ const calculateCompletionTime = (etaMinutes: number) => {
 
 export default function Dashboard() {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const [reports, setReports] = useState<Report[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -74,6 +74,9 @@ export default function Dashboard() {
       })
       
       if (!response.ok) {
+        if (response.status === 401) {
+          logout()
+        }
         throw new Error(`HTTP error! status: ${response.status}`)
       }
       
@@ -123,7 +126,7 @@ export default function Dashboard() {
     // Set up periodic refresh every minute
     const intervalId = setInterval(() => {
       fetchReports();
-    }, 60000); // 60000 ms = 1 minute
+    }, 300000); // 300000 ms = 5 minutes
 
     // Cleanup interval on unmount
     return () => clearInterval(intervalId);

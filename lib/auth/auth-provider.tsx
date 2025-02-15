@@ -170,6 +170,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await response.json()
   }
 
+  const handleUnauthorizedResponse = async (response: Response) => {
+    try {
+      const data = await response.json()
+      if (data.shouldLogout) {
+        logout()
+      }
+    } catch (error) {
+      console.error('Error handling unauthorized response:', error)
+    }
+  }
+
   const fetchUserDetails = async (token: string) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/detective/me/`, {
@@ -180,6 +191,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       })
 
       if (!response.ok) {
+        if (response.status === 401) {
+          await handleUnauthorizedResponse(response)
+        }
         throw new Error('Failed to fetch user details')
       }
 

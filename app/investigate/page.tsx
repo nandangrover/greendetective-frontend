@@ -19,7 +19,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
+import { useAuth } from "@/hooks/use-auth";
 const isValidUrl = (url: string) => {
   // Add https:// if no protocol is specified
   const urlToCheck = url.match(/^https?:\/\//) ? url : `https://${url}`;
@@ -89,7 +89,7 @@ export default function SubmitForm() {
   })
 
   const [reportsCount, setReportsCount] = useState(0);
-
+  const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -102,7 +102,10 @@ export default function SubmitForm() {
           },
         });
         
-        if (!response.ok) throw new Error('Failed to fetch reports');
+        if (!response.ok) {
+          logout()
+          throw new Error('Failed to fetch reports');
+        }
         
         const data = await response.json();
         setReportsCount(Array.isArray(data) ? data.length : 0);
@@ -113,6 +116,13 @@ export default function SubmitForm() {
 
     fetchReportsCount();
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      console.log("User is not authenticated, redirecting to login page");
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
 
   const onSubmit = async (data: FormData) => {
     // Ensure all URLs have https://
